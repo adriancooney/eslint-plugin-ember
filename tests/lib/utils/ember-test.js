@@ -288,6 +288,18 @@ describe('isComputedProp', () => {
   });
 });
 
+describe('isComputedDefinition', () => {
+  let node;
+
+  it('shouldn\'t allow macros', () => {
+    node = parse('Ember.computed.match()');
+    expect(emberUtils.isComputedDefinition(node)).not.toBeTruthy();
+
+    node = parse('Em.computed.match(\'foo\', /foo/)');
+    expect(emberUtils.isComputedDefinition(node)).not.toBeTruthy();
+  });
+});
+
 describe('isObserverProp', () => {
   let node;
 
